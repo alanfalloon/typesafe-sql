@@ -1,0 +1,40 @@
+Name:                typesafe-sql
+Version:             0.1
+Synopsis:            Type-safe inline SQL using template haskell and language-sqlite
+License:             LGPL-2.1
+License-file:        LICENSE
+Author:              Alan Falloon
+Maintainer:          alan.falloon@gmail.com
+Copyright:           (c) 2011 Alan Falloon
+Category:            Database
+Build-type:          Simple
+Cabal-version:       >=1.4
+
+Extra-source-files:
+  README
+
+Flag example
+  Description:       Build example
+  Default:           False
+
+Library
+  Hs-source-dirs:    src
+  Ghc-options:       -Wall -ddump-minimal-imports -ddump-splices
+  Extensions:        QuasiQuotes, TemplateHaskell
+  Exposed-modules:
+    Database.SQL.QQ
+  Build-depends:
+    base >= 4.2 && < 5,
+    containers >= 0.4,
+    language-sqlite >= 1.1,
+    template-haskell >= 2.5
+
+Executable typesafe-sql-example
+  Ghc-options:       -Wall -ddump-minimal-imports -ddump-splices
+  Extensions:        QuasiQuotes, TemplateHaskell
+  Main-is:           example.hs
+  Hs-source-dirs:    src examples
+  if flag(example)
+    Buildable:       True
+  else
+    Buildable:       False
